@@ -1,0 +1,26 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # every 30 minutes
+  workflow_dispatch: # on button click
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fork Sync
+        # You may pin to the exact commit or the version.
+        # uses: tgymnich/fork-sync@0cc6ac48fd51415e7c34e5b8823021bc952a5f5f
+        uses: tgymnich/fork-sync@v1.2.1
+        with:
+          owner: bobbyiliev
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          head: master
+          base: master
+          merge_method: merge
+          pr_title: "Fork Sync"
+          pr_message: |
+            This pull request is automated by [Fork Sync][fork-sync-link] GitHub Actions.
+
+            [fork-sync-link]: https://github.com/tgymnich/fork-sync
